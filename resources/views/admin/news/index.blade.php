@@ -1,11 +1,11 @@
-@extends('admin.Master')
+@extends('layout.master')
 
 @section('title')
     Noticias
 @endsection
 
-@section('content')
-    <div class="page-body" style="background: #000">
+@section('main_content')
+
         <!-- Page content area start -->
         <div class="page-content">
             <div class="container-fluid">
@@ -22,7 +22,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card" style="background: #fff">
+                        <div class="card">
                             <div class="card-header">
                                 <h2>{{ __('Lista de Noticias') }}</h2>
                                 <a href="{{ route('news.create') }}" class="btn btn-success btn-sm pull-right">
@@ -34,7 +34,7 @@
                                     <i class="fas fa-trash-alt"></i> Eliminar Seleccionadas
                                 </button>
                                 <div class="table-responsive">
-                                    <table id="advance-1" class="row-border data-table-filter table-style">
+                                    <table id="basic-1" class="row-border data-table-filter table-style">
                                         <thead>
                                             <tr>
                                                 <th><input type="checkbox" id="select-all"></th>
@@ -86,7 +86,7 @@
             </div>
         </div>
         <!-- Page content area end -->
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

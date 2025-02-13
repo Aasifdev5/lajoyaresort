@@ -80,7 +80,7 @@ class UserController extends Controller
             return $slider;
         });
 
-        return view('index', compact('user_session','sliders'));
+        return view('index', compact('user_session', 'sliders'));
     }
 
     public function membership()
@@ -99,7 +99,7 @@ class UserController extends Controller
 
         return view('segundaFase', compact('user_session'));
     }
-     public function land()
+    public function land()
     {
 
 
@@ -193,7 +193,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'custom_password' => $request->password, // Storing plain password is insecure; reconsider this
             'mobile_number' => $prefixedMobileNumber,
-           'id_number' => $request->code,
+            'id_number' => $request->code,
             'ip_address' => getIp(), // Assuming getIpAddress is a defined method
 
         ]);
@@ -332,7 +332,7 @@ class UserController extends Controller
 
         $supportQuestions = SupportTicketQuestion::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('question', 'like', '%' . $query . '%')
-                         ->orWhere('answer', 'like', '%' . $query . '%');
+                ->orWhere('answer', 'like', '%' . $query . '%');
         })->paginate(9); // Adjust number of items per page
 
 
@@ -403,45 +403,53 @@ class UserController extends Controller
     }
 
     public function blogs(Request $request)
-{
-    $query = $request->get('query'); // Get the search query
-
-    // Fetch blogs, filtering by the search query if it exists
-    $blogs = Blog::when($query, function ($queryBuilder) use ($query) {
-        $queryBuilder->where('title', 'like', '%' . $query . '%')
-            ->orWhere('short_description', 'like', '%' . $query . '%');
-    })->orderBy('id', 'DESC')->paginate(9);
-
-    $user_session = User::where('id', Session::get('LoggedIn'))->first();
-
-    $data['blogComments'] = BlogComment::active();
-    $blogComments = $data['blogComments']->whereNull('parent_id')->get();
-    $pages = Page::all();
-    $latest_posts = Blog::orderBy('id', 'DESC')->paginate(3);
-
-    return view('blog', compact('user_session', 'latest_posts', 'blogs', 'pages', 'blogComments', 'query'));
-}
-public function newsDetails(Request $request)
     {
+        $query = $request->get('query'); // Get the search query
 
-        $news = News::where('id', $request->id)->first();
+        // Fetch blogs, filtering by the search query if it exists
+        $blogs = Blog::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where('title', 'like', '%' . $query . '%')
+                ->orWhere('short_description', 'like', '%' . $query . '%');
+        })->orderBy('id', 'DESC')->paginate(9);
 
-        $latest_posts = News::orderBy('id', 'DESC')->paginate(3);
         $user_session = User::where('id', Session::get('LoggedIn'))->first();
-        // dd($request->id);
-        return view('newsDetails', compact('user_session', 'news', 'latest_posts'));
+
+        $data['blogComments'] = BlogComment::active();
+        $blogComments = $data['blogComments']->whereNull('parent_id')->get();
+        $pages = Page::all();
+        $latest_posts = Blog::orderBy('id', 'DESC')->paginate(3);
+
+        return view('blog', compact('user_session', 'latest_posts', 'blogs', 'pages', 'blogComments', 'query'));
+    }
+    public function newsDetails(Request $request)
+    {
+        if (Session::has('LoggedIn')) {
+
+            $news = News::where('id', $request->id)->first();
+
+            $latest_posts = News::orderBy('id', 'DESC')->paginate(3);
+            $user_session = User::where('id', Session::get('LoggedIn'))->first();
+            // dd($request->id);
+            return view('newsDetails', compact('user_session', 'news', 'latest_posts'));
+        } else {
+            return Redirect('Userlogin')->with('fail', 'Tienes que iniciar sesión primero');
+        }
     }
     public function news(Request $request)
     {
-        $query = $request->get('query');
-        $user_session = User::where('id', Session::get('LoggedIn'))->first();
+        if (Session::has('LoggedIn')) {
+            $query = $request->get('query');
+            $user_session = User::where('id', Session::get('LoggedIn'))->first();
 
-        $latest_posts = News::when($query, function ($queryBuilder) use ($query) {
-            $queryBuilder->where('title', 'like', '%' . $query . '%')
-                ->orWhere('content', 'like', '%' . $query . '%')->orWhere('author', 'like', '%' . $query . '%');
-        })->orderBy('id', 'DESC')->paginate(9);
+            $latest_posts = News::when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'like', '%' . $query . '%')
+                    ->orWhere('content', 'like', '%' . $query . '%')->orWhere('author', 'like', '%' . $query . '%');
+            })->orderBy('id', 'DESC')->paginate(9);
 
-        return view('news', compact('user_session', 'latest_posts'));
+            return view('news', compact('user_session', 'latest_posts'));
+        } else {
+            return Redirect('Userlogin')->with('fail', 'Tienes que iniciar sesión primero');
+        }
     }
     public function news_category($slug)
     {

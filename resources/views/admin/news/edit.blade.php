@@ -1,13 +1,13 @@
-@extends('admin.Master')
+@extends('layout.master')
 
 @section('title')
     Editar Noticia
 @endsection
 
-@section('content')
+@section('main_content')
     <!-- Page content area start -->
-    <div class="page-body" style="background: #000; margin-top: 80px;">
-        <div class="card" style="background: #fff">
+
+        <div class="card" >
             <div class="card-body">
                 <h1>Editar Noticia</h1>
                 <form action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data" id="newsForm">
@@ -16,7 +16,7 @@
 
                     <!-- Title -->
                     <div class="mb-3">
-                        <label for="title" class="form-label text-dark">Título</label>
+                        <label for="title" class="form-label text-light">Título</label>
                         <input type="text" name="title" class="form-control" value="{{ old('title', $news->title) }}" required>
                         @error('title')
                             <span class="text-danger">{{ $message }}</span>
@@ -25,7 +25,7 @@
 
                     <!-- News Type -->
                     <div class="mb-3">
-                        <label for="type" class="form-label text-dark">Tipo</label>
+                        <label for="type" class="form-label text-light">Tipo</label>
                         <select name="type" class="form-control" id="newsType" required>
                             <option value="text" {{ $news->type == 'text' ? 'selected' : '' }}>Texto</option>
                             <option value="image" {{ $news->type == 'image' ? 'selected' : '' }}>Imagen</option>
@@ -39,8 +39,8 @@
 
                     <!-- Content Field for Text -->
                     <div class="mb-3" id="textField" >
-                        <label for="content" class="form-label text-dark">Contenido</label>
-                        <textarea name="content" class="form-control summernote" rows="5">{{ old('content', $news->content) }}</textarea>
+                        <label for="content" class="form-label text-light">Contenido</label>
+                        <textarea name="content" class="form-control" id="editor1" rows="5">{{ old('content', $news->content) }}</textarea>
                         @error('content')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -48,7 +48,7 @@
 
                     <!-- File Field for Image, Audio, Video -->
                     <div class="mb-3" id="fileField" style="{{ $news->type == 'text' ? 'display: none;' : '' }}">
-                        <label for="file" class="form-label text-dark">Archivo</label>
+                        <label for="file" class="form-label text-light">Archivo</label>
                         <input type="file" name="file" class="form-control" id="fileInput">
                         @if ($news->file_path) <!-- Display current file (image/audio/video) -->
                             <div class="mt-2">
@@ -84,7 +84,7 @@
 
                     <!-- Thumbnail Field -->
                     <div class="mb-3">
-                        <label for="thumbnail" class="form-label text-dark">Portada (Thumbnail)</label>
+                        <label for="thumbnail" class="form-label text-light">Portada (Thumbnail)</label>
                         <input type="file" name="thumbnail" class="form-control">
                         @if ($news->thumbnail) <!-- Display current thumbnail -->
                             <div class="mt-2">
@@ -98,7 +98,7 @@
 
                     <!-- Author -->
                     <div class="mb-3">
-                        <label for="author" class="form-label text-dark">Autor</label>
+                        <label for="author" class="form-label text-light">Autor</label>
                         <input type="text" name="author" class="form-control" value="{{ old('author', $news->author) }}">
                         @error('author')
                             <span class="text-danger">{{ $message }}</span>
@@ -109,7 +109,7 @@
                 </form>
             </div>
         </div>
-    </div>
+
     <!-- Page content area end -->
 
     <script>

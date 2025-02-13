@@ -28,7 +28,11 @@
                   <span>{{ __('Panel') }}</span>
                 </a>
               </div>
-
+              <div class="menu-item mb-3 d-flex align-items-center">
+                <a href="{{ url('news') }}" style="text-decoration: none; color: inherit;">
+                  <span>{{ __('Nuevas Noticias') }}</span>
+                </a>
+              </div>
               <div class="menu-item d-flex align-items-center">
                 <a href="{{ url('logout') }}" style="text-decoration: none; color: inherit;">
                   <span>{{ __('Logout') }}</span>
@@ -41,7 +45,7 @@
           <div class="elementor-column elementor-col-75">
             <h4 class="text-light mb-3">{{ __('Welcome ') . $user_session->name }}</h4>
 
-            
+
 
           </div>
         </div>

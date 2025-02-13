@@ -103,8 +103,12 @@
 
                         </ul>
                       </li>
-
-
+                      <li class="sidebar-list {{ Request::is('news') ? 'active' : '' }}"><i class="fa fa-thumb-tack"></i>
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('news.index') }}">
+                            <i class="icofont icofont-triangle text-light"></i>&nbsp;&nbsp;&nbsp;
+                            <span>Noticias</span>
+                        </a>
+                    </li>
 
 
                     <li class="sidebar-list {{ Request::is('blogs*') ? 'active' : '' }}"><i class="fa fa-thumb-tack"></i>
