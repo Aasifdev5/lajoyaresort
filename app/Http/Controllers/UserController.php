@@ -15,14 +15,14 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Country;
 
+use App\Models\News;
+
 use App\Models\Notification;
-
 use App\Models\Page;
-use App\Models\PasswordReset;
 
+use App\Models\PasswordReset;
 use App\Models\Sales;
 use App\Models\SupportTicketQuestion;
-use Hash;
 use App\Models\User;
 
 use App\Notifications\NewUserRegisteredNotification;
@@ -31,6 +31,7 @@ use App\Notifications\UserRegisteredNotification;
 use App\Notifications\VerifyEmailNotification;
 use App\Traits\SendNotification;
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -178,7 +179,7 @@ class UserController extends Controller
             'code' => 'required',
             'password' => ['required', 'string', 'min:8', 'max:30'],
             'mobile_number' => 'required|string|max:15',
-           
+
         ]);
 
         // Handle mobile number with prefix
@@ -194,7 +195,7 @@ class UserController extends Controller
             'mobile_number' => $prefixedMobileNumber,
            'id_number' => $request->code,
             'ip_address' => getIp(), // Assuming getIpAddress is a defined method
-           
+
         ]);
 
         if ($user) {
@@ -378,7 +379,7 @@ class UserController extends Controller
     {
         if (Session::has('LoggedIn')) {
             $user_session = User::where('id', Session::get('LoggedIn'))->first();
-           
+
             // dd($sales);
             $pages = Page::all();
 
@@ -420,7 +421,28 @@ class UserController extends Controller
 
     return view('blog', compact('user_session', 'latest_posts', 'blogs', 'pages', 'blogComments', 'query'));
 }
+public function newsDetails(Request $request)
+    {
 
+        $news = News::where('id', $request->id)->first();
+
+        $latest_posts = News::orderBy('id', 'DESC')->paginate(3);
+        $user_session = User::where('id', Session::get('LoggedIn'))->first();
+        // dd($request->id);
+        return view('newsDetails', compact('user_session', 'news', 'latest_posts'));
+    }
+    public function news(Request $request)
+    {
+        $query = $request->get('query');
+        $user_session = User::where('id', Session::get('LoggedIn'))->first();
+
+        $latest_posts = News::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where('title', 'like', '%' . $query . '%')
+                ->orWhere('content', 'like', '%' . $query . '%')->orWhere('author', 'like', '%' . $query . '%');
+        })->orderBy('id', 'DESC')->paginate(9);
+
+        return view('news', compact('user_session', 'latest_posts'));
+    }
     public function news_category($slug)
     {
         $news = DB::table('blogs')
