@@ -1,143 +1,192 @@
 @extends('master')
 @section('title')
-{{ __('Propiedad Compartida en Cabañas') }}
+    {{ __('Propiedad Compartida en Cabañas') }}
 @endsection
 @section('content')
+<style>
+    .uniform-img {
+        width: 100%; /* Full width */
+        height: auto; /* Auto height to maintain aspect ratio */
+        object-fit: cover; /* Prevents distortion */
+        border-radius: 10px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+        .uniform-img {
+            height: 350px; /* Reduced height for tablets */
+        }
+    }
+
+    @media (max-width: 576px) {
+        .uniform-img {
+            height: 250px; /* Further reduced height for mobile devices */
+        }
+    }
+</style>
 <div class="page_content_wrap" style="padding-top: 0 !important; padding-bottom: 0 !important;">
     <div class="content_wrap">
         <div class="content">
             <!-- Header Section -->
-            <section class="elementor-section elementor-top-section elementor-section-stretched elementor-section-full_width elementor-section-height-default" 
-                     style="padding: 20px 0;">
-                <div class="container text-center">
+            <section class="text-center py-4">
+                <div class="container">
                     <h1 class="display-4 mb-4">CABAÑAS IMAGEN GENERAL</h1>
-                    <img src="{{ asset('WhatsApp Image 2025-02-11 at 14.55.05.jpeg') }}" alt="Cabañas" class="img-fluid mb-4" style="max-width: 100%; border-radius: 10px;">
-                    
-                    
+                    <img src="{{ asset('General.jpg') }}" alt="Cabañas" class="img-fluid uniform-img shadow mb-4">
                 </div>
             </section>
-
             <!-- Tipología de Cabañas -->
-            <!-- Tipología de Cabañas -->
-<section class="elementor-section elementor-top-section elementor-section-stretched elementor-section-full_width elementor-section-height-default" 
-         style="background-color: #f8f9fa; padding: 40px 0;">
-    <div class="container">
-        <h2 class="text-center mb-4">CABAÑA JUNIOR “especialmente para parejas” </h2>
-        <div class="row text-center">
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.11.58.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <!-- Junior Suite -->
-            <div class="col-md-4">
-                <h4 class="mb-2"></h4>
-                
-                <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.12.13.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.14.30.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.14.49.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <h1>CARACTERÍSTICAS</h1>
-            <ul class="list-unstyled">
-                    <li>2 Personas</li>
-                    <li>una sala</li>
-                    <li>baño con jacuzzi </li>
-                    <li>1 wolking closer</li>
-                    <li>Minibar</li>
-                    <li>45 m2</li>
-                </ul>
-            <!--<div class="col-md-6 offset-md-3">-->
-            <!--    <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.11.58.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">-->
-            <!--</div>-->
-            </div>
-            <!-- Royal Suite -->
-            <div class="col-md-4">
-                <h4 class="mb-2">CABAÑA ROYAL SUITE PARA FAMILIAS DE 4 PERSONAS</h4>
-               
-                <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.15.09.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.15.27.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.15.45.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.16.05.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.16.27.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <h1>CARACTERÍSTICAS</h1>
-                <ul class="list-unstyled">
-                    <li>4 PERSONAS</li>
-                    <li>65 METROS CUADRADOS</li>
-                    <li>SALA - COMEDOR</li>
-                    <li>COCINA ESTILO AMERICANO</li>
-                    <li>HABITACIÓN TIPO SUITE CON CAMA KING</li>
-                    <li>WOLKING CLOSET</li>
-                    <li>CHURRASQUERAS Y JACUZZI</li>
-                </ul>
-            </div>
-            <!-- Presidencial Suite -->
-            <div class="col-md-4">
-                <h4 class="mb-2">CABAÑA PRESIDENCIAL PARA FAMILIAS NUMEROSAS DE 6 PERSONAS</h4>
-                
-                 <div class="col-md-6 offset-md-3">
-                <img src="{{ asset('WhatsApp Image 2025-02-11 at 20.16.40.jpeg') }}" alt="Tipología de Cabañas" width="700px" class="img-fluid mb-4" style="max-width: 100%;border-radius: 10px;">
-            </div>
-            <h1>CARACTERÍSTICAS</h1>
-                <ul class="list-unstyled">
-                    <li>85 METROS CUADRADOS</li>
-                    <li>SALA COMEDOR</li>
-                    <li>COCINA ESTILO AMERICANA</li>
-                    <li>WALKING CLOSET</li>
-                    <li>HABITACIÓN CON WALKING CLOSET Y BAÑO PRIVADO</li>
-                    <li>BAÑO DE VISITAS</li>
-                    <li>CHURRASQUERAS</li>
-                    <li>JACUZZI TIPO PISCINA</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+            <section class="bg-light py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">CABAÑA JUNIOR “Especialmente para parejas”</h2>
+                    <div class="row g-4 justify-content-center text-center">
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Junior.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Junior - Sala B.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Junior - Sala A.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Junior - Dormitorio.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Junior - Baño.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('JUNIOR 2.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('JUNIOR 1.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Screenshot (310).png') }}" class="img-fluid uniform-img shadow">
+                        </div>
+                    </div>
+                    <h3 class="text-center mt-4">CARACTERISTICAS DE CABAÑA JUNIOR </h3>
+                    <ul class="list-group list-group-flush shadow-sm">
+                        <li class="list-group-item">45 m2</li>
+                        <li class="list-group-item">Sala de Estar</li>
+                        <li class="list-group-item">Baño</li>
+                        <li class="list-group-item">1 dormitorio con vestidor </li>
+                        <li class="list-group-item">Minibar</li>
+                        <li class="list-group-item">Jacuzzi</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Cabaña Royal Suite -->
+            <section class="py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">CABAÑA ROYAL SUITE PARA FAMILIAS DE 4 PERSONAS</h2>
+                    <div class="row g-4 text-center">
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Fachada Royal.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal 1.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal 2.jpg') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal - Area Social.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal - Cocina.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal - Dormitorio.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal - Sala Comedor.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Royal - Sala.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div>
+                    </div>
+                    <h3 class="text-center mt-4">CARACTERISTICAS DE CABAÑA ROYAL</h3>
+                    <ul class="list-group list-group-flush shadow-sm">
+                        <li class="list-group-item">4 Personas</li>
+                        <li class="list-group-item">65 m²</li>
+                        <li class="list-group-item">Sala - Comedor</li>
+                        <li class="list-group-item">Cocina estilo americano</li>
+                        <li class="list-group-item">Habitación tipo suite con cama King</li>
+                        <li class="list-group-item">Jacuzzi</li>
+                        <li class="list-group-item">Churrasqueras</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Cabaña Presidencial -->
+            <section class="bg-light py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">CABAÑA PRESIDENCIAL PARA FAMILIAS NUMEROSAS DE 6 PERSONAS</h2>
 
+                    <div class="row g-4 justify-content-center text-center">
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('6 Presidencial - Área Social .JPG') }}" class="img-fluid uniform-img shadow">
+                        </div>
+                        <br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('5 Presidencial - Dormitorio Hijos.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('4 Presidencial - Dormitorio Principal .JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('3 Presidencial - Cocina.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('2 Presidencial - Sala TV.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('1 Presidencial - Sala.JPG') }}" class="img-fluid uniform-img shadow">
+                        </div><br>
+
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('Screenshot (311).png') }}" class="img-fluid uniform-img shadow">
+                        </div>
+                    </div>
+                    <h3 class="text-center mt-4">CARACTERISTICAS DE CABAÑA PRESIDENCIAL</h3>
+                    <ul class="list-group list-group-flush shadow-sm">
+                        <li class="list-group-item">85 m²</li>
+                        <li class="list-group-item">Sala Comedor</li>
+                        <li class="list-group-item">Cocina estilo americana</li>
+
+                        <li class="list-group-item">Habitación con Walking Closet y baño privado</li>
+                        <li class="list-group-item">Baño de visitas</li>
+                        <li class="list-group-item">Churrasqueras</li>
+                        <li class="list-group-item">Jacuzzi tipo piscina</li>
+                    </ul>
+                </div>
+            </section>
             <!-- Flexibility Section -->
-            <section class="elementor-section elementor-top-section elementor-section-stretched elementor-section-full_width elementor-section-height-default" 
-                     style="padding: 40px 0;">
+            <section class="py-5">
                 <div class="container text-center">
                     <h2 class="mb-4">Flexibilidad</h2>
                     <p class="lead">Elija sus 7 días en temporada alta y 7 días en temporada baja para adaptar su estancia a sus necesidades.</p>
                 </div>
             </section>
-
             <!-- Club Access Section -->
-            <section class="elementor-section elementor-top-section elementor-section-stretched elementor-section-full_width elementor-section-height-default" 
-                     style="background-color: #f8f9fa; padding: 40px 0;">
+            <section class="bg-light py-5">
                 <div class="container">
                     <h2 class="text-center mb-4">Acceso Ilimitado al Club</h2>
-                    <div class="row text-center">
-                        <div class="col-md-6">
-                            <img src="{{ asset('werrt.jpg') }}" alt="Parque Acuático" class="img-fluid mb-3" style="border-radius: 10px;">
-                            <h4 class="mb-2">Parque Acuático</h4>
-                            <p>Disfrute de emocionantes , piscinas y áreas de recreación acuática.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="{{ asset('hgfg.jpg') }}" alt="Instalaciones Deportivas" class="img-fluid mb-3" style="border-radius: 10px;">
-                            <h4 class="mb-2">Instalaciones</h4>
+                    <div class="row g-4 text-center">
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('werrt.jpg') }}" class="img-fluid uniform-img shadow">
+                            <h4 class="mt-2">Parque Acuático</h4>
+                            <p>Disfrute de emocionantes piscinas y áreas de recreación acuática.</p>
+                        </div><br>
+                        <div class="col-md-6 col-12">
+                            <img src="{{ asset('WhatsApp Image 2025-02-04 at 19.33.58.jpeg') }}" class="img-fluid uniform-img shadow">
+                            <h4 class="mt-2">Instalaciones</h4>
                             <p>Acceso a canchas deportivas, fútbol sala, toboganes acuáticos, áreas de juego para niños, y mucho más.</p>
                         </div>
                     </div>
                 </div>
             </section>
-
             <!-- All Year Section -->
-            <section class="elementor-section elementor-top-section elementor-section-stretched elementor-section-full_width elementor-section-height-default" 
-                     style="padding: 40px 0;">
+            <section class="py-5">
                 <div class="container text-center">
                     <h2 class="mb-4">Todo el Año</h2>
                     <p class="lead">Disfrute de nuestras instalaciones durante todo el año, sin restricciones.</p>

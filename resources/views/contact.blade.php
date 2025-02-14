@@ -17,17 +17,18 @@
         --booked_button_color: #56C477;
       }
     </style>
-    
+
     <meta name='robots' content='noindex, nofollow' />
     <style>
       img:is([sizes="auto"i], [sizes^="auto,"i]) {
         contain-intrinsic-size: 3000px 1500px
       }
     </style>
-   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-   
+
     <link property="stylesheet" rel='stylesheet' id='trx_demo_icons-css' href='css/trx_demo_icons.css' type='text/css' media='all' />
     <link property="stylesheet" rel='stylesheet' id='trx_demo_icons_animation-css' href='css/animation.css' type='text/css' media='all' />
     <link property="stylesheet" rel='stylesheet' id='sbi_styles-css' href='css/sbi-styles.min.css' type='text/css' media='all' />
@@ -552,13 +553,13 @@
     <link property="stylesheet" rel='stylesheet' id='neptunus-responsive-css' href='css/__responsive(1).css' type='text/css' media='all' />
     <link property="stylesheet" rel='stylesheet' id='font-awesome-official-v4shim-css' href='css/v4-shims.css' type='text/css' media='all'  />
     <link property="stylesheet" rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto' type='text/css' media='all' />
-    
+
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}" id="jquery-core-js"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-migrate.min.js') }}" id="jquery-migrate-js"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.blockUI.min.js') }}" id="jquery-blockui-js" defer></script>
-    
-   
-  
+
+
+
     <style type="text/css">
       <!--
       #page_preloader {
@@ -567,7 +568,7 @@
       }
       -->
     </style>
-    
+
     <noscript>
       <style>
         .woocommerce-product-gallery {
@@ -759,7 +760,7 @@
 <link property="stylesheet" rel="stylesheet" id="rs-plugin-settings-css" href="{{ asset('css/rs6.css') }}" type="text/css" media="all">
 
     <link href="//fonts.googleapis.com/css?family=Nunito:400%2C300%2C700%7CRoboto:400&display=swap" rel="stylesheet" property="stylesheet" media="all" type="text/css">
-    
+
     <link property="stylesheet" rel='stylesheet' id='wc-blocks-style-css' href='css/wc-blocks.css' type='text/css' media='all' />
     <link property="stylesheet" rel='stylesheet' id='elementor-post-831-css' href='css/post-831.css' type='text/css' media='all' />
     <link property="stylesheet" rel='stylesheet' id='elementor-post-1433-css' href='css/post-1433.css' type='text/css' media='all' />
@@ -866,7 +867,7 @@
         <span>Membresía Vitalicia La Joya</span>
       </a>
     </li>
-   
+
     <li id="menu-item-2605" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2605">
       <a href="{{ url('ownership') }}">
         <span>Propiedad Compartida en Cabañas</span>
@@ -926,7 +927,7 @@
                                                             </li>
                                                         </ul>
                                                     </li> --}}
-                                                     
+
                                                     <li id="menu-item-216" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
     {{ Request::is('contact') ? 'current-menu-item' : '' }}">
                                                         <a href="{{ url('contact') }}">
@@ -959,9 +960,14 @@
                                                     @else
                                                     <li id="menu-item-216" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
     {{ Request::is('Userlogin') ? 'current-menu-item' : '' }}">
-                                                        <a href="{{ url('Userlogin') }}">
-                                                            <span> Iniciar Sesión</span>
-                                                        </a>
+    <a href="{{ url('Userlogin') }}"
+    class="sc_button sc_button_default sc_button_size_normal sc_button_icon_left">
+    <span class="sc_button_text"><i class="fa-solid fa-right-to-bracket"></i>
+        <span class="sc_button_title">Zona de miembros</span>
+    </span>
+    <!-- /.sc_button_text -->
+</a>
+
                                                     </li>
                                                     @endif
                                                 </ul>
@@ -1076,8 +1082,8 @@
                                     <span>FAQs</span>
                                 </a>
                             </li> --}}
-                            
-                            
+
+
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
                                 {{ Request::is('contact') ? 'current-menu-item' : '' }}">
                                 <a href="{{ url('contact') }}">
@@ -1110,9 +1116,14 @@
                              @else
                               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
                                 {{ Request::is('Userlogin') ? 'current-menu-item' : '' }}">
-                                <a href="{{ url('Userlogin') }}">
-                                    <span> Iniciar Sesión</span>
+                                <a href="{{ url('Userlogin') }}"
+                                    class="sc_button sc_button_default sc_button_size_normal sc_button_icon_left">
+                                    <span class="sc_button_text"><i class="fa-solid fa-right-to-bracket"></i>
+                                        <span class="sc_button_title">Zona de miembros</span>
+                                    </span>
+                                    <!-- /.sc_button_text -->
                                 </a>
+
                             </li>
                              @endif
                         </ul>
@@ -1180,13 +1191,13 @@
     document.querySelectorAll('.open_child_menu').forEach(toggle => {
         toggle.addEventListener('click', (e) => {
             e.preventDefault(); // Prevent default action
-            
+
             // Find the parent menu item
             const menuItem = toggle.closest('.menu-item-has-children');
-            
+
             if (menuItem) {
                 menuItem.classList.toggle('opened'); // Toggle 'opened' class on menu item
-                
+
                 // Find the submenu and toggle its display
                 const subMenu = menuItem.querySelector('.sub-menu');
                 if (subMenu) {
@@ -1235,7 +1246,7 @@
                                     <span> A 1 km del parque de los recuerdos</span>
                                   </div>
                                 </div>
-                                
+
                               </div>
                             </div>
                             <div class="trx_addons_column-1_3">
@@ -1359,7 +1370,7 @@
                                       </span>
                                     </div>
                                   </div>
-                                  
+
                                 </div>
                               </div>
                               <div class="elementor-column-gap-extended">
@@ -1403,7 +1414,7 @@
                 </div>
               </div>
             </section>
-            
+
           </div>
         </div>
         <!-- .entry-content -->
@@ -1461,7 +1472,7 @@
                                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2818">
                                                             <a href="{{ url('membership') }}">Membresía Vitalicia La Joya</a>
                                                         </li>
-                                                       
+
                                                         <li id="menu-item-2818"
                                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2818">
                                                             <a href="{{ url('ownership') }}">Propiedad Compartida en Cabañas</a>
@@ -1490,7 +1501,7 @@
                                         data-widget_type="wp-widget-nav_menu.default">
                                         <div class="elementor-widget-container">
                                             <aside id="wp-widget-nav_menu-3" class="widget wp-widget-nav_menu">
-                                                
+
                                               <div class="menu-about-container">
   <div class="sc_icons_item_details">
     <h5 class="widget_title">
@@ -1547,7 +1558,7 @@
                                                             <a href="{{ url('contact') }}">Contactos</a>
                                                         </li>
                                                     </ul>
-                                                   
+
                                                 </div>
                                             </aside>
                                         </div>
@@ -1703,7 +1714,7 @@
       var sbiajaxurl = "/wp-admin/admin-ajax.php";
     </script>
     <script>
-      /* 
+      /*
 																							<![CDATA[ */
       var tribe_l10n_datatables = {
         "aria": {
@@ -1918,7 +1929,7 @@
 <script type="text/javascript" src="{{ asset('js/frontend-modules.min.js') }}" id="elementor-frontend-modules-js"></script>
 
     <script type="text/javascript" id="elementor-frontend-js-before">
-      /* 
+      /*
 																							<![CDATA[ */
       var elementorFrontendConfig = {
         "environmentMode": {
@@ -2128,6 +2139,6 @@
         window.RS_MODULES.checkMinimal();
       };
     </script>
-   
+
   </body>
 </html>

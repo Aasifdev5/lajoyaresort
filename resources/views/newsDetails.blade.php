@@ -30,9 +30,7 @@
                         </div>
                         <div class="post_meta post_meta_other text-secondary">
                             <span class="post_meta_item post_date">
-                                Fecha:
-
-                                {{ \Carbon\Carbon::parse($news->created_at)->locale('es')->translatedFormat('d F Y, h:i A') }}
+                                Fecha: {{ \Carbon\Carbon::parse($news->created_at)->locale('es')->translatedFormat('d F Y, h:i A') }}
                             </span>
                             @if ($news->author)
                                 <span class="post_meta_item post_author">
@@ -90,27 +88,66 @@
                         {!! $news->content !!}
                     </div>
 
-                    <!-- Reactions Section -->
-                    <div id="trx_addons_emotions" class="trx_addons_emotions mt-4 p-3 bg-light text-dark  shadow">
+                    <div id="trx_addons_emotions" class="trx_addons_emotions mt-4 p-3 bg-light text-dark shadow">
                         <h5 class="trx_addons_emotions_title">What's your reaction?</h5>
-                        <span class="trx_addons_emotions_item trx_addons_emotions_item_icon_heart icon-heart" data-slug="cool" data-postid="{{ $news->id }}">
-                            <span class="trx_addons_emotions_item_number">0</span> Cool
+                        @php
+                        use App\Models\Reaction;
+
+                        // Fetch reactions from the database before the loop
+                        $newsReactions = Reaction::where('news_id', $news->id)->pluck('count', 'type');
+                    @endphp
+
+                    @foreach(['cool' => 'heart', 'bad' => 'path-1888', 'lol' => 'group-1045', 'sad' => 'group-1047'] as $slug => $icon)
+                        <span class="trx_addons_emotions_item icon-{{ $icon }}" data-slug="{{ $slug }}" data-postid="{{ $news->id }}">
+                            <span class="trx_addons_emotions_item_number">
+                                {{ $newsReactions[$slug] ?? 0 }}
+                            </span>
+                            {{ ucfirst($slug) }}
                         </span>
-                        <span class="trx_addons_emotions_item trx_addons_emotions_item_icon_path-1888 icon-path-1888" data-slug="bad" data-postid="{{ $news->id }}">
-                            <span class="trx_addons_emotions_item_number">0</span> Bad
-                        </span>
-                        <span class="trx_addons_emotions_item trx_addons_emotions_item_icon_group-1045 icon-group-1045" data-slug="lol" data-postid="{{ $news->id }}">
-                            <span class="trx_addons_emotions_item_number">0</span> Lol
-                        </span>
-                        <span class="trx_addons_emotions_item trx_addons_emotions_item_icon_group-1047 icon-group-1047" data-slug="sad" data-postid="{{ $news->id }}">
-                            <span class="trx_addons_emotions_item_number">0</span> Sad
-                        </span>
+                    @endforeach
+
                     </div>
+
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        let newsId = {{ $news->id }};
+                        loadReactions(newsId);
+
+                        document.querySelectorAll('.trx_addons_emotions_item').forEach(item => {
+                            item.addEventListener('click', function() {
+                                let slug = this.getAttribute('data-slug');
+
+                                fetch('/reactions', {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ news_id: newsId, type: slug })
+                                }).then(response => response.json())
+                                  .then(data => {
+                                      if (data.success) {
+                                          this.querySelector('.trx_addons_emotions_item_number').innerText = data.count;
+                                      }
+                                  }).catch(error => console.error('Error:', error));
+                            });
+                        });
+                    });
+
+                    function loadReactions(newsId) {
+                        fetch('/reactions/' + newsId)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.querySelectorAll('.trx_addons_emotions_item').forEach(item => {
+                                let slug = item.getAttribute('data-slug');
+                                item.querySelector('.trx_addons_emotions_item_number').innerText = data[slug] || 0;
+                            });
+                        });
+                    }
+                    </script>
 
                     <!-- Tags & Social Share -->
                     <div class="post_meta post_meta_single mt-4">
-
-
                         <span class="post_meta_item post_share">
                             <div class="socials_share socials_size_tiny socials_type_block">
                                 <span class="socials_caption">Share:</span>
@@ -136,42 +173,88 @@
                 </div><!-- .entry-content -->
             </article>
 
-
-
             <!-- Comments Section -->
             <section class="comments_wrap">
+                <div class="comments_list">
+                    <h3 class="section_title">{{ __('Comentarios') }}</h3>
+                    <ul id="comments_container">
+                        @foreach ($comments as $comment)
+                            <li>
+                                @if ($comment->user)
+                                    <strong>{{ $comment->user->name }}</strong>: {{ $comment->comment }}
+                                @else
+                                    <strong>Anonymous</strong>: {{ $comment->comment }}
+                                @endif
+                                <br>
+                                <small>
+                                    {{ \Carbon\Carbon::parse($comment->created_at)->locale('es')->translatedFormat('d F Y, h:i A') }}
+                                </small>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+
                 <div class="comments_form_wrap">
                     <div class="comments_form">
-                        <div id="respond" class="comment-respond">
-                            <h3 class="section_title comments_form_title">
-                                {{ __('Deja un comentario') }}
-                            </h3>
-                            <form action="{{ url('comments.store') }}" method="POST" id="commentform" class="comment-form">
-                                @csrf
-                                <div class="comments_field comments_author">
-                                    <label for="author" class="required">{{ __('Nombre') }}</label>
-                                    <input id="author" name="author" type="text" placeholder="Tu Nombre *" required>
-                                </div>
-                                <div class="comments_field comments_email">
-                                    <label for="email" class="required">{{ __('E-mail') }}</label>
-                                    <input id="email" name="email" type="email" placeholder="Tu E-mail *" required>
-                                </div>
-                                <div class="comments_field comments_comment">
-                                    <label for="comment" class="required">{{ __('Comentario') }}</label>
-                                    <textarea id="comment" name="comment" placeholder="Tu comentario *" required></textarea>
-                                </div>
-                                <div class="comments_field">
-                                    <input id="privacy_policy" name="privacy_policy" type="checkbox" required>
-                                    <label for="privacy_policy">{{ __('Acepto los términos y condiciones.') }}</label>
-                                </div>
-                                <p class="form-submit">
-                                    <button type="submit" class="submit">{{ __('Enviar Comentario') }}</button>
-                                </p>
-                            </form>
-                        </div>
+                        <h3 class="section_title comments_form_title">
+                            {{ __('Deja un comentario') }}
+                        </h3>
+                        <form id="commentform">
+                            @csrf
+                            <input type="hidden" name="news_id" value="{{ $news->id }}"> <!-- Add this line -->
+                            <div class="comments_field comments_author">
+                                <label for="author" class="required">{{ __('Nombre') }}</label>
+                                <input id="author" name="author" type="text" placeholder="Tu Nombre *" required>
+                            </div>
+                            <div class="comments_field comments_email">
+                                <label for="email" class="required">{{ __('E-mail') }}</label>
+                                <input id="email" name="email" type="email" placeholder="Tu E-mail *" required>
+                            </div>
+                            <div class="comments_field comments_comment">
+                                <label for="comment" class="required">{{ __('Comentario') }}</label>
+                                <textarea id="comment" name="comment" placeholder="Tu comentario *" required></textarea>
+                            </div>
+                            <div class="comments_field">
+                                <input id="privacy_policy" name="privacy_policy" type="checkbox">
+                                <label for="privacy_policy">{{ __('Acepto los términos y condiciones.') }}</label>
+                            </div>
+                            <p class="form-submit">
+                                <button type="submit" class="submit">{{ __('Enviar Comentario') }}</button>
+                            </p>
+                        </form>
                     </div>
                 </div>
             </section>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('commentform').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let formData = new FormData(this);
+
+        fetch("{{ route('comments.store') }}", {
+            method: 'POST',
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Comentario enviado con éxito.') {
+                this.reset(); // Reset the form
+                let container = document.getElementById('comments_container');
+                // Append the new comment to the list
+                container.innerHTML += `
+                    <li>
+                        <strong>${data.comment.author}</strong>: ${data.comment.comment}
+                        <br><small>${new Date(data.comment.created_at).toLocaleString()}</small>
+                    </li>
+                `;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+            </script>
 
             <!-- Related Posts Section -->
             <section class="related_wrap related_position_below_content related_style_classic">
@@ -215,7 +298,7 @@
                 </div>
             </section>
 
-        </div><!-- /.content -->
-    </div><!-- /.content_wrap -->
-</div><!-- /.page_content_wrap -->
+        </div>
+    </div>
+</div>
 @endsection

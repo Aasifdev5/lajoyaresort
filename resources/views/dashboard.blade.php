@@ -23,22 +23,26 @@
           <!-- Side Menu -->
           <div class="elementor-column elementor-col-25">
             <div class="text-white p-3 rounded">
-              <div class="menu-item mb-3 d-flex align-items-center">
-                <a href="{{ url('dashboard') }}" style="text-decoration: none; color: inherit;">
-                  <span>{{ __('Panel') }}</span>
-                </a>
+                <div class="menu-item mb-3 d-flex align-items-center">
+                  <a href="{{ url('dashboard') }}" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-gauge me-2"></i> <!-- Dashboard Icon -->
+                    <span>{{ __('Panel') }}</span>
+                  </a>
+                </div>
+                <div class="menu-item mb-3 d-flex align-items-center">
+                  <a href="{{ url('news') }}" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-newspaper me-2"></i> <!-- News Icon -->
+                    <span>{{ __('Nuevas Noticias') }}</span>
+                  </a>
+                </div>
+                <div class="menu-item d-flex align-items-center">
+                  <a href="{{ url('logout') }}" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> <!-- Logout Icon -->
+                    <span>{{ __('Logout') }}</span>
+                  </a>
+                </div>
               </div>
-              <div class="menu-item mb-3 d-flex align-items-center">
-                <a href="{{ url('news') }}" style="text-decoration: none; color: inherit;">
-                  <span>{{ __('Nuevas Noticias') }}</span>
-                </a>
-              </div>
-              <div class="menu-item d-flex align-items-center">
-                <a href="{{ url('logout') }}" style="text-decoration: none; color: inherit;">
-                  <span>{{ __('Logout') }}</span>
-                </a>
-              </div>
-            </div>
+
           </div>
 
           <!-- Main Content -->

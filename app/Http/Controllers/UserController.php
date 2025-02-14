@@ -13,18 +13,20 @@ use App\Models\BlogComment;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Comment;
+
 use App\Models\Country;
 
 use App\Models\News;
-
 use App\Models\Notification;
-use App\Models\Page;
 
+use App\Models\Page;
 use App\Models\PasswordReset;
+use App\Models\Reaction;
 use App\Models\Sales;
+
 use App\Models\SupportTicketQuestion;
 use App\Models\User;
-
 use App\Notifications\NewUserRegisteredNotification;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\UserRegisteredNotification;
@@ -424,17 +426,62 @@ class UserController extends Controller
     public function newsDetails(Request $request)
     {
         if (Session::has('LoggedIn')) {
+            $news = News::findOrFail($request->id);
+            $comments = Comment::where('news_id', $request->id)->latest()->get();
+            $reactions = Reaction::where('news_id', $request->id)->pluck('count', 'type');
+            $latest_posts = News::latest()->take(3)->get();
+            $user_session = User::find(Session::get('LoggedIn'));
 
-            $news = News::where('id', $request->id)->first();
-
-            $latest_posts = News::orderBy('id', 'DESC')->paginate(3);
-            $user_session = User::where('id', Session::get('LoggedIn'))->first();
-            // dd($request->id);
-            return view('newsDetails', compact('user_session', 'news', 'latest_posts'));
+            return view('newsDetails', compact('user_session', 'news', 'latest_posts', 'comments', 'reactions'));
         } else {
-            return Redirect('Userlogin')->with('fail', 'Tienes que iniciar sesión primero');
+            return redirect('Userlogin')->with('fail', 'Tienes que iniciar sesión primero');
         }
     }
+
+    public function Reactionstore(Request $request)
+    {
+        $request->validate([
+            'news_id' => 'required|exists:news,id',
+            'type' => 'required|in:cool,bad,lol,sad'
+        ]);
+
+        $reaction = Reaction::firstOrCreate([
+            'news_id' => $request->news_id,
+            'type' => $request->type,
+        ]);
+
+        $reaction->increment('count');
+
+        return response()->json(['success' => true, 'count' => $reaction->count]);
+    }
+
+    public function Commentstore(Request $request)
+{
+    // // Validate the request
+    // $request->validate([
+    //     'news_id' => 'required|exists:news,id',
+    //     'author' => 'required|string|max:255',
+    //     'email' => 'required|email',
+    //     'comment' => 'required|string',
+    //     'privacy_policy' => 'accepted' // Ensure this field is validated
+    // ]);
+// Get the logged-in user's ID from the session
+$user_id = Session::get('LoggedIn');
+    // Create the comment
+    $comment = Comment::create([
+        'news_id' => $request->news_id,
+        'user_id' => $user_id,
+        'author' => $request->author,
+        'email' => $request->email,
+        'comment' => $request->comment
+    ]);
+
+    // Return the created comment as JSON
+    return response()->json([
+        'message' => 'Comentario enviado con éxito.',
+        'comment' => $comment
+    ]);
+}
     public function news(Request $request)
     {
         if (Session::has('LoggedIn')) {

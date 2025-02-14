@@ -78,7 +78,10 @@ class User extends Authenticatable
 
         return $userinfo;
     }
-
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public static function getUserFullname($id)
     {
         $userinfo = User::find($id);

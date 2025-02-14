@@ -152,7 +152,8 @@ Route::post('contact_send', [Pages::class, 'contact_send']);
 
     Route::get('service', [UserController::class, 'service'])->name('service');
 
-
+    Route::post('/comments/store', [UserController::class, 'Commentstore'])->name('comments.store');
+    Route::post('/reactions', [UserController::class, 'Reactionstore']);
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
