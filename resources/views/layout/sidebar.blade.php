@@ -1,3 +1,7 @@
+@php
+    $isSuperAdmin = $user_session->is_super_admin ?? 0;
+@endphp
+@if($isSuperAdmin)
 <div class="sidebar-wrapper">
     <div>
         <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid for-light"
@@ -162,3 +166,4 @@
         </nav>
     </div>
 </div>
+@endif

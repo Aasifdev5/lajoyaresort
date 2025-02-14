@@ -130,7 +130,7 @@ class UserController extends Controller
     {
 
 
-        $user_session = User::where('id', Session::get('LoggedIn'))->first();
+        $user_session    = User::where('id', Session::get('LoggedIn'))->first();
 
         $pages = Page::all();
         return view('faq', compact('user_session', 'pages'));
@@ -238,9 +238,11 @@ class UserController extends Controller
 
                 $user->update(['is_online' => 1, 'last_seen' => Carbon::now('UTC')]);
                 $request->session()->put('LoggedIn', $user->id);
+                $user_session = User::where('id', Session::get('LoggedIn'))->first();
+                $request->session()->put('user_session', $user);
                 $userId = Session::get('LoggedIn');
 
-                return redirect('dashboard');
+                return redirect('news');
             } else {
                 return back()->with('fail', 'Password does not match');
             }
@@ -665,6 +667,7 @@ $user_id = Session::get('LoggedIn');
             }
 
             Session::forget('LoggedIn');
+            Session::forget('user_session');
             $request->session()->invalidate();
             return redirect('/');
         }

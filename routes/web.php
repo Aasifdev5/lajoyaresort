@@ -140,7 +140,7 @@ Route::group(['middleware' => ['prevent-back-history', SetLocale::class]], funct
     Route::get('/genTerm', [UserController::class, 'genTerm'])->name('genTerm');
     Route::get('/privacy', [UserController::class, 'privacy'])->name('privacy');
     Route::get('/book', [UserController::class, 'book'])->name('book');
-Route::post('contact_send', [Pages::class, 'contact_send']);
+    Route::post('contact_send', [Pages::class, 'contact_send']);
     Route::get('Userlogin', [UserController::class, 'Userlogin'])->name('Userlogin');
     Route::get('newsDetails/{id}', [UserController::class, 'newsDetails'])->name('newsDetails');
 
@@ -154,16 +154,16 @@ Route::post('contact_send', [Pages::class, 'contact_send']);
 
     Route::post('/comments/store', [UserController::class, 'Commentstore'])->name('comments.store');
     Route::post('/reactions', [UserController::class, 'Reactionstore']);
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/blog_details/{slug}', [UserController::class, 'blog_details'])->name('blog_details');
-Route::post('/blog/{id}/like', [BlogController::class, 'incrementLike'])->name('blog.like');
-Route::post('blog-comment', [UserController::class, 'blogCommentStore'])->name('blog-comment.store');
-Route::post('blog-comment-reply', [UserController::class, 'blogCommentReplyStore'])->name('blog-comment-reply.store');
-Route::get('search-blog-list', [UserController::class, 'searchBlogList'])->name('search-blog.list');
-     Route::get('/signup', [UserController::class, 'signup'])->name('signup')->middleware('alreadyLoggedIn');
-Route::post('/reg', [UserController::class, 'registration']);
+    Route::get('/blog_details/{slug}', [UserController::class, 'blog_details'])->name('blog_details');
+    Route::post('/blog/{id}/like', [BlogController::class, 'incrementLike'])->name('blog.like');
+    Route::post('blog-comment', [UserController::class, 'blogCommentStore'])->name('blog-comment.store');
+    Route::post('blog-comment-reply', [UserController::class, 'blogCommentReplyStore'])->name('blog-comment-reply.store');
+    Route::get('search-blog-list', [UserController::class, 'searchBlogList'])->name('search-blog.list');
+    Route::get('/signup', [UserController::class, 'signup'])->name('signup')->middleware('alreadyLoggedIn');
+    Route::post('/reg', [UserController::class, 'registration']);
     Route::get('/contact', [UserController::class, 'contact'])->name('contact');
     Route::get('/about', [UserController::class, 'about'])->name('about');
     Route::get('/workUs', [UserController::class, 'workUs'])->name('workUs');
@@ -186,27 +186,26 @@ Route::post('/reg', [UserController::class, 'registration']);
     Route::get('/events', [UserController::class, 'events'])->name('events')->middleware('isLoggedIn');
     Route::get('/verification', [UserController::class, 'verification'])->name('verification')->middleware('isLoggedIn');
     Route::get('/home', [UserController::class, 'home'])->name('home')->middleware('isLoggedIn');
-
-    });
-
+});
 
 
 
 
 
 
-    Route::post('/forget_mail', [UserController::class, 'forget_mail'])->name('forget_mail');
-    Route::post('/sendResetPasswordLink', [UserController::class, 'sendResetPasswordLink'])->name('sendResetPasswordLink');
-    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-    Route::get('/ResetPasswordLoad', [UserController::class, 'ResetPasswordLoad'])->name('ResetPasswordLoad');
-    Route::post('/ResetPassword', [UserController::class, 'ResetPassword'])->name('ResetPassword');
+
+Route::post('/forget_mail', [UserController::class, 'forget_mail'])->name('forget_mail');
+Route::post('/sendResetPasswordLink', [UserController::class, 'sendResetPasswordLink'])->name('sendResetPasswordLink');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/ResetPasswordLoad', [UserController::class, 'ResetPasswordLoad'])->name('ResetPasswordLoad');
+Route::post('/ResetPassword', [UserController::class, 'ResetPassword'])->name('ResetPassword');
 
 
 Route::get('admin/unlock', [Admin::class, 'unlock'])->name('unlock')->middleware('AdminAlreadyLoggedIn');
 Route::post('/update-mode', [Admin::class, 'updateMode']);
 Route::get('/get-user-mode', [Admin::class, 'getUserMode'])->name('getUserMode');
-Route::group(['prefix' => 'admin', 'middleware' => 'check.session'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['check.session', 'super.admin']], function () {
 
     Route::group(['middleware' => 'admin-prevent-back-history', SetLocale::class], function () {
 
@@ -222,8 +221,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.session'], function ()
             Route::post('bulk-delete', [TestimonialController::class, 'bulkDelete'])->name('testimonials.bulk.delete');
         });
 
-         // Portfolio routes
-         Route::prefix('portfolios')->group(function () {
+        // Portfolio routes
+        Route::prefix('portfolios')->group(function () {
             Route::get('/', [PortfolioController::class, 'index'])->name('portfolios.index');
             Route::get('create', [PortfolioController::class, 'create'])->name('portfolios.create');
             Route::post('store', [PortfolioController::class, 'store'])->name('portfolios.store');
@@ -547,7 +546,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.session'], function ()
 
 
 
-        Route::get('login', [Admin::class, 'admin'])->name('admin')->middleware('AdminAlreadyLoggedIn');
+
 
 
         Route::get('dashboard', [Admin::class, 'dashboard'])->name('dashboard')->middleware('AdminIsLoggedIn');
@@ -592,11 +591,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.session'], function ()
         Route::post('sendMail/{id}', [EmailAppController::class, 'sendMail'])->name('sendMail');
         Route::get('email-compose', [EmailAppController::class, 'compose'])->name('compose')->middleware('AdminIsLoggedIn');
     });
-    Route::get('/forget_password', [Admin::class, 'forget_password'])->name('forget_password');
-    Route::post('/log', [Admin::class, 'login'])->name('login');
-    Route::post('/unlocked', [Admin::class, 'unlocked'])->name('unlocked');
-    Route::get('/signout', [Admin::class, 'logout'])->name('logout');
+
 });
+// Public routes (accessible without authentication)
+Route::get('/admin/login', [Admin::class, 'admin'])->name('admin')->middleware('AdminAlreadyLoggedIn');
+Route::post('/admin/log', [Admin::class, 'login'])->name('login');
+Route::get('/admin/forget_password', [Admin::class, 'forget_password'])->name('forget_password');
+Route::post('/admin/unlocked', [Admin::class, 'unlocked'])->name('unlocked');
+Route::get('/admin/signout', [Admin::class, 'logout'])->name('logout');
 Route::get('facebook', [FacebookSocialiteController::class, 'facebookRedirect']);
 Route::get('callback/facebook', [FacebookSocialiteController::class, 'loginWithFacebook']);
 Route::get('google', [GoogleController::class, 'redirectToGoogle']);

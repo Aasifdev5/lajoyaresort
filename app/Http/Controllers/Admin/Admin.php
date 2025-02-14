@@ -109,6 +109,8 @@ class Admin extends Controller
                 $data->update(['is_online' => 1, 'last_seen' => Carbon::now()]);
                 session()->put('LoggedIn', $data->id);
                 session()->put('LoggedInTimestamp', now());
+
+                $request->session()->put('user_session', $data);
                 return redirect('admin/dashboard');
             } else {
                 return back()->with('fail', 'Password does not match');
@@ -446,10 +448,12 @@ class Admin extends Controller
             $check = User::where('id', Session::get('LoggedIn'))->first();
             if ($check->is_super_admin == 0) {
                 Session::forget('LoggedIn');
+                Session::forget('user_session');
                 $request->session()->invalidate();
                 return redirect('/');
             }
             Session::forget('LoggedIn');
+            Session::forget('user_session');
             $request->session()->invalidate();
             return redirect('admin/login');
         }

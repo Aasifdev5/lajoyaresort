@@ -870,7 +870,7 @@
 
     <li id="menu-item-2605" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2605">
       <a href="{{ url('ownership') }}">
-        <span>Propiedad Compartida en Cabañas</span>
+        <span>PROPIEDAD FRACCIONAL CABAÑAS</span>
       </a>
     </li>
      <li id="menu-item-2605" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2605">
@@ -957,6 +957,19 @@
 
                         </a>
                                                     </li>
+                                                    <li id="menu-item-216" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
+                                                        {{ Request::is('logout') ? 'current-menu-item' : '' }}">
+
+                                                        <a href="{{ url('logout') }}"
+                                                        class="sc_button sc_button_default sc_button_size_normal sc_button_icon_left">
+                                                        <span class="sc_button_text"><i class="fa-solid fa-right-to-bracket"></i>
+                                                            <span class="sc_button_title">Logout</span>
+                                                        </span>
+                                                        <!-- /.sc_button_text -->
+                                                    </a>
+                                                                                                            <!-- /.sc_button -->
+
+                                                                                                        </li>
                                                     @else
                                                     <li id="menu-item-216" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
     {{ Request::is('Userlogin') ? 'current-menu-item' : '' }}">
@@ -1037,7 +1050,7 @@
     </li>
     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2605">
       <a href="{{ url('ownership') }}">
-        <span>Propiedad Compartida en Cabañas</span>
+        <span>PROPIEDAD FRACCIONAL CABAÑAS</span>
       </a>
     </li>
     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2605">
@@ -1113,6 +1126,13 @@
 
                         </a>
                             </li>
+                            <a href="{{ url('logout') }}"
+                                                        class="sc_button sc_button_default sc_button_size_normal sc_button_icon_left">
+                                                        <span class="sc_button_text"><i class="fa-solid fa-right-to-bracket"></i>
+                                                            <span class="sc_button_title">Logout</span>
+                                                        </span>
+                                                        <!-- /.sc_button_text -->
+                                                    </a>
                              @else
                               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-216
                                 {{ Request::is('Userlogin') ? 'current-menu-item' : '' }}">
@@ -1150,13 +1170,15 @@
     <span class="social_icon social_icon_youtube">
         <span class="icon-youtube"></span>
     </span>
+</a><a target="_blank"
+   href="{{ $general_setting['tiktok_url'] ?? '' }}"
+   class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
+   <span class="social_icon social_icon_tiktok">
+       <span class="fab fa-tiktok"></span>
+
+   </span>
 </a>
-                        <a target="_blank" href="{{ $general_setting['twitter_url'] ?? '' }}"
-                            class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
-                            <span class="social_icon social_icon_x">
-                                <span class="icon-x"></span>
-                            </span>
-                        </a>
+
                         <a target="_blank" href="{{ $general_setting['instagram_url'] ?? '' }}"
                             class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
                             <span class="social_icon social_icon_instagramm">
@@ -1475,7 +1497,7 @@
 
                                                         <li id="menu-item-2818"
                                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2818">
-                                                            <a href="{{ url('ownership') }}">Propiedad Compartida en Cabañas</a>
+                                                            <a href="{{ url('ownership') }}">PROPIEDAD FRACCIONAL CABAÑAS</a>
                                                         </li>
                                                         <li id="menu-item-2818"
                                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2818">
@@ -1610,14 +1632,16 @@
     <span class="social_icon social_icon_youtube">
         <span class="icon-youtube"></span>
     </span>
+</a><a target="_blank"
+   href="{{ $general_setting['tiktok_url'] ?? '' }}"
+   class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
+   <span class="social_icon social_icon_tiktok">
+       <span class="fab fa-tiktok"></span>
+
+   </span>
 </a>
-                                                    <a target="_blank"
-                                                        href="{{ $general_setting['twitter_url'] ?? '' }}"
-                                                        class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
-                                                        <span class="social_icon social_icon_x">
-                                                            <span class="icon-x"></span>
-                                                        </span>
-                                                    </a>
+
+
                                                     <a target="_blank"
                                                         href="{{ $general_setting['instagram_url'] ?? '' }}"
                                                         class="social_item social_item_style_icons sc_icon_type_icons social_item_type_icons">
@@ -1650,7 +1674,7 @@
       window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
       window.RS_MODULES.type = 'compiled';
     </script>
-    <a href="#" class="trx_addons_scroll_to_top trx_addons_icon-up" title="Scroll to top"></a>
+
     <script>
       var ajaxRevslider;
 

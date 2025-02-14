@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="page_content_wrap" style="padding-top: 0 !important; padding-bottom: 0 !important;">
+    <div class="page_content_wrap" style="padding-top: 50px !important; padding-bottom: 0 !important;">
         <div class="content_wrap">
             <style>
                 /* Additional styles as previously defined */
@@ -26,8 +26,7 @@
                     /* Optional: Light hover effect */
                 }
             </style>
-            <h1 class="text-center" style="color: #000;">{{ __('El Noticia de') }} <span
-                    style="color: #0090ff;">{{ __('Lajoyaresort') }}</span></h1>
+
             <div class="content">
                 <div class="posts_container columns_wrap columns_padding_bottom">
                     @if (Session::has('success'))

@@ -55,14 +55,7 @@
                             $fileType = pathinfo($news->file_path, PATHINFO_EXTENSION);
                         @endphp
 
-                        @if (in_array($fileType, ['jpg', 'jpeg', 'png', 'gif']))
-                            <div class="text-center mb-4">
-                                <img src="{{ asset($news->file_path) }}"
-                                    alt="News Image"
-                                    class="img-fluid  shadow-lg"
-                                    style="max-width: 100%;">
-                            </div>
-                        @endif
+
 
                         @if (in_array($fileType, ['mp3', 'wav']))
                             <div class="text-center mb-4">
